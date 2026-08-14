@@ -1,0 +1,1 @@
+{"name":"nonprofit-openai-gateway-typescript","private":true,"type":"module","scripts":{"start":"tsx src/volunteer_reminder.ts","test":"tsx src/volunteer_reminder.test.ts"},"dependencies":{"openai":"^4.0.0"},"devDependencies":{"tsx":"^4.0.0","typescript":"^5.0.0"}}
