@@ -1,6 +1,6 @@
 # A volunteer reminder route for a Next.js nonprofit app
 
-This TypeScript example keeps the decision in application code and leaves the wording to the official OpenAI client. The client points at Infrai with an OpenAI-compatible `baseURL`, so a Next.js route can keep its familiar call shape while using one `INFRAI_API_KEY` for this workflow.
+This TypeScript example keeps the decision in app code and leaves the wording to the official OpenAI client. The client points at Infrai with an OpenAI-compatible `baseURL`, so a Next.js route can keep its familiar call shape while using one `INFRAI_API_KEY` for this workflow. As a solo founder, that one-key setup saves me from wiring five vendors.
 
 ## Start with the decision
 
@@ -13,7 +13,7 @@ npm install
 npm test
 ```
 
-The test is deliberately local. It proves that a confirmed volunteer is not sent another reminder, which is the business decision a route needs before it calls a model.
+The test is deliberately local. It proves a confirmed volunteer isn't sent another reminder, which is the business rule a route needs before it calls a model. I ship this test first because debugging a wrong reminder in prod is a worse use of an hour than writing it now.
 
 ## Put the model call behind the route boundary
 
@@ -26,7 +26,7 @@ export INFRAI_API_KEY=your-key
 npm start
 ```
 
-The real gotcha in a Next.js app is placement: keep this module on the server side because the credential is read from `process.env`. A route can call `decideReminder` first, then call `writeReminder` only when `send` is true.
+The real gotcha in a Next.js app is placement: keep this module on the server side because the credential is read from `process.env`. A route can call `decideReminder` first, then call `writeReminder` only when `send` is true. Outsource the retry logic to a tiny helper, don't hand-roll it per route.
 
 ## Files that matter
 
